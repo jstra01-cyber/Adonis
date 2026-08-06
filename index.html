@@ -1,74 +1,65 @@
-Here's the full updated `privacy-policy.html` with the Support/Contact banner at the top — copy this into your GitHub repo (replace the existing file), commit, and your GitHub Pages URL will update:
-Action: view_file({"path":"/app/legal/privacy-policy.html"})
-Observation: [Showing lines 1-70 of 70 total] /app/legal/privacy-policy.html:
-1|<!doctype html>
-2|<html lang="en">
-3|<head>
-4|<meta charset="utf-8" />
-5|<meta name="viewport" content="width=device-width, initial-scale=1" />
-6|<title>AdonisIQ — Privacy Policy</title>
-7|<style>
-8|  body { font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; color: #1a1a1a; max-width: 760px; margin: 0 auto; padding: 40px 20px; line-height: 1.6; }
-9|  h1 { font-size: 30px; margin-bottom: 4px; }
-10|  h2 { font-size: 19px; margin-top: 32px; }
-11|  .muted { color: #666; font-size: 14px; }
-12|  a { color: #b8892b; }
-13|  ul { padding-left: 20px; }
-14|  .support { background: #fdf8ec; border: 1px solid #e6d9b8; border-radius: 10px; padding: 12px 16px; margin: 16px 0 8px; font-size: 15px; }
-15|</style>
-16|</head>
-17|<body>
-18|  <h1>Privacy Policy</h1>
-19|  <p class="muted">AdonisIQ · Last updated: June 1, 2026</p>
-20|
-21|  <div class="support">
-22|    <strong>Support &amp; Contact:</strong> Questions or need help? Email
-23|    <a href="mailto:adonisiqadmin@gmail.com">adonisiqadmin@gmail.com</a> and we'll get back to you.
-24|  </div>
-25|
-26|  <p>AdonisIQ ("we", "us") provides an AI-assisted health and physique coaching app. This policy explains what we collect, how we use it, and your choices. By using AdonisIQ you agree to this policy.</p>
-27|
-28|  <h2>Information we collect</h2>
-29|  <ul>
-30|    <li><strong>Account data:</strong> your name and email address, used to create and secure your account.</li>
-31|    <li><strong>Health &amp; fitness data you enter or connect:</strong> daily check-ins (sleep, mood, energy, stress, body weight, waist), daily step counts (including data you choose to import from Apple Health), training logs, nutrition entries, goals, and lab/biomarker results.</li>
-32|    <li><strong>Subscription data:</strong> purchase and entitlement status processed through Apple/Google and our billing provider (RevenueCat). We never receive your full payment card details.</li>
-33|  </ul>
-34|
-35|  <h2>How we use your information</h2>
-36|  <ul>
-37|    <li>To calculate your metrics (e.g., TDEE, macro targets, readiness) and generate coaching guidance and reports.</li>
-38|    <li>To provide, maintain, secure, and improve the app.</li>
-39|    <li>To manage your subscription and unlock premium features.</li>
-40|  </ul>
-41|
-42|  <h2>Apple Health</h2>
-43|  <p>If you grant permission, we read your step count from Apple Health solely to display and track your daily activity in the app. This data is not used for advertising and is not shared. You can revoke access anytime in the iOS Settings &gt; Privacy &amp; Security &gt; Health.</p>
-44|
-45|  <h2>AI processing</h2>
-46|  <p>To generate explanations, summaries, and coaching, relevant, de-identified context from your entries may be processed by third-party AI providers under contractual confidentiality. We do not sell your data or use it to train third-party public models.</p>
-47|
-48|  <h2>Data sharing</h2>
-49|  <p>We do not sell your personal data. We share data only with service providers who help us operate the app (cloud hosting, AI processing, and subscription management) under agreements that require them to protect it, and when required by law.</p>
-50|
-51|  <h2>Data retention &amp; deletion</h2>
-52|  <p>We keep your data while your account is active. You can permanently delete your account and all associated data at any time from <em>Profile &gt; Delete account</em> in the app. Deletion is immediate and irreversible.</p>
-53|
-54|  <h2>Security</h2>
-55|  <p>We use industry-standard measures including encrypted transport (HTTPS) and hashed credentials. No method of transmission or storage is 100% secure.</p>
-56|
-57|  <h2>Children</h2>
-58|  <p>AdonisIQ is not directed to children under 13 (or the minimum age in your region), and we do not knowingly collect their data.</p>
-59|
-60|  <h2>Medical disclaimer</h2>
-61|  <p>AdonisIQ provides informational fitness and wellness guidance only and is not a medical device or a substitute for professional medical advice. Always consult a qualified physician regarding your health and before acting on lab-related insights.</p>
-62|
-63|  <h2>Your rights</h2>
-64|  <p>Depending on your region, you may have rights to access, correct, export, or delete your data. Contact us to exercise these rights.</p>
-65|
-66|  <h2>Contact</h2>
-67|  <p>Questions? Email <a href="mailto:adonisiqadmin@gmail.com">adonisiqadmin@gmail.com</a>.</p>
-68|</body>
-69|</html>
-70|
-[End of file]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AdonisIQ — Privacy Policy</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; line-height: 1.6; color: #1a1a1a; background: #fff; }
+  h1 { font-size: 28px; margin-bottom: 4px; }
+  h2 { font-size: 19px; margin-top: 32px; }
+  .updated { color: #666; font-size: 14px; margin-bottom: 24px; }
+  ul { padding-left: 20px; }
+  a { color: #b8863b; }
+  @media (prefers-color-scheme: dark) { body { background: #111; color: #eee; } .updated { color: #aaa; } }
+</style>
+</head>
+<body>
+  <h1>AdonisIQ Privacy Policy</h1>
+  <p class="updated">Last updated: June 2026</p>
+  <p class="updated"><strong>Contact:</strong> <a href="mailto:adonisiqadmin@gmail.com">adonisiqadmin@gmail.com</a></p>
+
+  <p>AdonisIQ ("we", "us") provides an AI-powered health and fitness coaching app. This policy explains what we collect, why, and your choices. By using AdonisIQ you agree to this policy.</p>
+
+  <h2>Information We Collect</h2>
+  <ul>
+    <li><strong>Account information:</strong> your email address (or Apple ID via Sign in with Apple) and authentication details.</li>
+    <li><strong>Health &amp; fitness data you enter:</strong> body weight, waist and body measurements, daily check-ins (sleep, energy, soreness, stress, mood), nutrition, workouts, and optional lab biomarkers.</li>
+    <li><strong>Apple Health data (with your permission):</strong> step count and resting heart rate, read only to calculate your recovery and consistency scores. This data is never used for advertising and is not shared with third parties for their own use.</li>
+    <li><strong>Usage data:</strong> basic app interactions needed to operate and improve the service.</li>
+  </ul>
+
+  <h2>How We Use Your Information</h2>
+  <ul>
+    <li>To provide the core features: your AdonisIQ Score, readiness, adaptive targets, trends, and AI coaching.</li>
+    <li>To generate personalized coaching. Your logged data is sent to our AI provider(s) solely to produce coaching responses for you. It is not used to train third-party models for advertising.</li>
+    <li>To operate your account, process your subscription, and provide support.</li>
+  </ul>
+
+  <h2>Sharing</h2>
+  <p>We do not sell your personal data. We share data only with service providers that help us run the app (secure cloud hosting/database and the AI language-model provider that generates coaching), and only as needed to deliver the service, and with Apple for subscription processing.</p>
+
+  <h2>Data Retention &amp; Security</h2>
+  <p>We retain your data while your account is active. We use reasonable technical and organizational measures to protect it. No method of transmission or storage is 100% secure.</p>
+
+  <h2>Your Choices &amp; Rights</h2>
+  <ul>
+    <li>You can revoke Apple Health access anytime in the iOS Settings &gt; Privacy &amp; Security &gt; Health.</li>
+    <li>You can request deletion of your account and associated data by contacting us at the email below.</li>
+  </ul>
+
+  <h2>Medical Disclaimer</h2>
+  <p>AdonisIQ is for general fitness and informational purposes only and does not provide medical advice or diagnosis. Consult a qualified physician regarding any health concern or before acting on lab values.</p>
+
+  <h2>Children</h2>
+  <p>AdonisIQ is not directed to children under 13 (or the minimum age in your region), and we do not knowingly collect their data.</p>
+
+  <h2>Changes</h2>
+  <p>We may update this policy; material changes will be posted here with a new "Last updated" date.</p>
+
+  <h2>Contact</h2>
+  <p>Questions or data requests: <a href="mailto:adonisiqadmin@gmail.com">adonisiqadmin@gmail.com</a></p>
+</body>
+</html>

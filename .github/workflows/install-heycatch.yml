@@ -1,0 +1,60 @@
+name: Install HeyCatch analytics
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/install-heycatch.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Add HeyCatch analytics loader to public pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          pages = [
+              Path('index.html'),
+              Path('android/index.html'),
+              Path('download/index.html'),
+              Path('faq/index.html'),
+              Path('privacy/index.html'),
+              Path('support/index.html'),
+              Path('terms/index.html'),
+              Path('about/index.html'),
+              Path('compare/index.html'),
+          ]
+          tag = '<script type="module" src="/heycatch-analytics.js"></script>'
+
+          for page in pages:
+              if not page.exists():
+                  raise SystemExit(f'Missing expected page: {page}')
+              text = page.read_text(encoding='utf-8')
+              if tag in text:
+                  print(f'Already installed: {page}')
+                  continue
+              if '</head>' not in text:
+                  raise SystemExit(f'No </head> found in {page}')
+              text = text.replace('</head>', f'{tag}\n</head>', 1)
+              page.write_text(text, encoding='utf-8')
+              print(f'Installed: {page}')
+          PY
+      - name: Commit analytics loader
+        run: |
+          if git diff --quiet; then
+            echo "No changes needed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html android/index.html download/index.html faq/index.html privacy/index.html support/index.html terms/index.html about/index.html compare/index.html
+          git commit -m "Install HeyCatch analytics site-wide"
+          git push origin main

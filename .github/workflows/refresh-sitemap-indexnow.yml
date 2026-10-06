@@ -1,0 +1,126 @@
+name: Refresh sitemap and notify IndexNow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - '.github/workflows/refresh-sitemap-indexnow.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Generate sitemap from real page modification dates
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from urllib.parse import quote
+          import subprocess
+          from xml.sax.saxutils import escape
+
+          BASE = 'https://adonisiq.app'
+
+          def url_for(path: Path):
+              rel = path.as_posix()
+              if rel == 'index.html':
+                  return BASE + '/'
+              if path.name.lower() == 'index.html':
+                  return f'{BASE}/{quote(path.parent.as_posix(), safe="/")}/'
+              return f'{BASE}/{quote(rel, safe="/")}'
+
+          def lastmod(path: Path):
+              result = subprocess.run(
+                  ['git', 'log', '-1', '--format=%cI', '--', path.as_posix()],
+                  check=True, text=True, capture_output=True
+              ).stdout.strip()
+              if not result:
+                  raise SystemExit(f'No git modification date for {path}')
+              return result
+
+          pages = sorted(Path('.').rglob('*.html'))
+          rows = []
+          for page in pages:
+              rows.append((url_for(page), lastmod(page)))
+
+          out = ['<?xml version="1.0" encoding="UTF-8"?>',
+                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+          for url, modified in rows:
+              out.append('  <url>')
+              out.append(f'    <loc>{escape(url)}</loc>')
+              out.append(f'    <lastmod>{escape(modified)}</lastmod>')
+              out.append('  </url>')
+          out.append('</urlset>')
+          Path('sitemap.xml').write_text('\n'.join(out) + '\n', encoding='utf-8')
+          print(f'Generated sitemap.xml with {len(rows)} URLs')
+          PY
+
+      - name: Commit sitemap when changed
+        run: |
+          if git diff --quiet -- sitemap.xml; then
+            echo "sitemap.xml already current"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add sitemap.xml
+            git commit -m "Refresh sitemap lastmod values"
+            git push origin main
+          fi
+
+      - name: Notify IndexNow of published pages
+        env:
+          INDEXNOW_KEY: 35a64a45a43381bfcaf07a4dd84816d2
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from urllib.parse import quote
+          import json, os, subprocess
+
+          BASE = 'https://adonisiq.app'
+          KEY = os.environ['INDEXNOW_KEY']
+
+          def url_for(path: Path):
+              rel = path.as_posix()
+              if rel == 'index.html': return BASE + '/'
+              if path.name.lower() == 'index.html':
+                  return f'{BASE}/{quote(path.parent.as_posix(), safe="/")}/'
+              return f'{BASE}/{quote(rel, safe="/")}'
+
+          # On a normal publish, notify only HTML pages changed in that push.
+          # On manual/initial runs, notify all public HTML pages.
+          before = os.environ.get('GITHUB_EVENT_BEFORE', '')
+          sha = os.environ.get('GITHUB_SHA', '')
+          changed = []
+          if before and sha and before != '0000000000000000000000000000000000000000':
+              cp = subprocess.run(['git','diff','--name-only',before,sha,'--','*.html','**/*.html'], text=True, capture_output=True)
+              changed = [Path(x) for x in cp.stdout.splitlines() if x.endswith('.html') and Path(x).exists()]
+          pages = changed or sorted(Path('.').rglob('*.html'))
+          urls = sorted({url_for(p) for p in pages})
+          payload = {
+              'host': 'adonisiq.app',
+              'key': KEY,
+              'keyLocation': f'{BASE}/{KEY}.txt',
+              'urlList': urls,
+          }
+          Path('/tmp/indexnow.json').write_text(json.dumps(payload), encoding='utf-8')
+          print('IndexNow URLs:', *urls, sep='\n- ')
+          PY
+          status=$(curl -sS -o /tmp/indexnow-response.txt -w "%{http_code}" \
+            -X POST https://api.indexnow.org/indexnow \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data-binary @/tmp/indexnow.json)
+          echo "IndexNow HTTP status: $status"
+          cat /tmp/indexnow-response.txt || true
+          if [ "$status" != "200" ] && [ "$status" != "202" ]; then
+            echo "IndexNow submission failed" >&2
+            exit 1
+          fi

@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.adonisiq.app",
+      "sha256_cert_fingerprints": [
+        "2B:24:2A:5C:05:65:90:3D:DC:3E:09:D9:BB:29:B4:0F:5D:E1:25:37:09:B5:58:1D:1A:01:16:74:96:37:C7:41"
+      ]
+    }
+  }
+]

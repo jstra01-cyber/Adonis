@@ -7,7 +7,9 @@
       "namespace": "android_app",
       "package_name": "com.adonisiq.app",
       "sha256_cert_fingerprints": [
-        "2B:24:2A:5C:05:65:90:3D:DC:3E:09:D9:BB:29:B4:0F:5D:E1:25:37:09:B5:58:1D:1A:01:16:74:96:37:C7:41"
+        "0B:01:5C:BA:4B:AD:87:E2:0E:DF:20:2D:F9:85:37:F0:D9:1B:34:FF:91:80:3E:E4:40:D1:D3:C4:2C:A0:08:B0",
+        "62:BB:88:95:8A:F4:79:4E:B9:5B:8B:0C:93:69:61:90:AD:73:9C:C4:2C:47:6F:B5:6E:A1:23:DC:9F:69:CF:56",
+        "79:29:38:EB:9E:17:5F:CC:96:71:C0:EC:08:CC:D7:FE:63:B3:09:95:9A:F1:53:09:C1:F4:C7:5C:5D:F6:DB:C9"
       ]
     }
   }

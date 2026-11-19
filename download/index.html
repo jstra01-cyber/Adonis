@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="canonical" href="https://adonisiq.app/download/">
 <title>AdonisIQ Download — iPhone &amp; Android Access</title>
-<meta name="description" content="Download AdonisIQ for iPhone from the App Store, join Android early access, or choose the right destination automatically from your current device.">
+<meta name="description" content="Download AdonisIQ for iPhone from the App Store, download AdonisIQ from Google Play for Android, or choose the right app store automatically for your device.">
 <meta name="theme-color" content="#090a0d">
 <style>
 :root{
@@ -42,7 +42,7 @@ h1{font-size:clamp(42px,8vw,66px);line-height:1;letter-spacing:-.05em;margin:12p
 @media(max-width:600px){.actions{grid-template-columns:1fr}.card{padding:20px}}
 </style>
 <script type="module" src="/heycatch-analytics.js"></script>
-<script type="application/ld+json" id="adonisiq-org-schema">{"@context":"https://schema.org","@type":"Organization","name":"AdonisIQ","url":"https://adonisiq.app/","logo":"https://adonisiq.app/adonisiq-app-icon.png","sameAs":["https://www.instagram.com/adonisiq_app/","https://apps.apple.com/us/app/adonisiq-ai-fitness-coach/id6798106536","https://github.com/jstra01-cyber/Adonis"]}</script>
+<script type="application/ld+json" id="adonisiq-org-schema">{"@context":"https://schema.org","@type":"Organization","name":"AdonisIQ","url":"https://adonisiq.app/","logo":"https://adonisiq.app/adonisiq-app-icon.png","sameAs":["https://www.instagram.com/adonisiq_app/","https://apps.apple.com/us/app/adonisiq-ai-fitness-coach/id6798106536","https://github.com/jstra01-cyber/Adonis","https://play.google.com/store/apps/details?id=com.adonisiq.app&hl=en_US"]}</script>
 </head>
 <body>
 <main class="wrap">
@@ -56,7 +56,7 @@ h1{font-size:clamp(42px,8vw,66px);line-height:1;letter-spacing:-.05em;margin:12p
 
   <div id="fallback" class="actions hidden">
     <a class="btn apple" href="https://apps.apple.com/us/app/adonisiq/id6798106536">Download for iPhone</a>
-    <a class="btn android" href="/android/">Android Early Access</a>
+    <a class="btn android" href="https://play.google.com/store/apps/details?id=com.adonisiq.app&hl=en_US" target="_blank" rel="noopener noreferrer">Get it on Google Play</a>
   </div>
 
   <div class="note">If you aren’t redirected automatically, choose your device above.</div>
@@ -68,7 +68,7 @@ h1{font-size:clamp(42px,8vw,66px);line-height:1;letter-spacing:-.05em;margin:12p
 <script>
 (function(){
   const APP_STORE = "https://apps.apple.com/us/app/adonisiq/id6798106536";
-  const ANDROID = "/android/";
+  const ANDROID = "https://play.google.com/store/apps/details?id=com.adonisiq.app&hl=en_US";
 
   const ua = navigator.userAgent || navigator.vendor || window.opera || "";
   const platform = navigator.platform || "";
@@ -92,7 +92,7 @@ h1{font-size:clamp(42px,8vw,66px);line-height:1;letter-spacing:-.05em;margin:12p
     fallback.classList.remove("hidden");
     setTimeout(function(){ window.location.replace(APP_STORE); }, 350);
   } else if (isAndroid) {
-    status.textContent = "Opening AdonisIQ Android Early Access…";
+    status.textContent = "Opening AdonisIQ on Google Play…";
     fallback.classList.remove("hidden");
     setTimeout(function(){ window.location.replace(ANDROID); }, 350);
   } else {
